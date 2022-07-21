@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+const Container = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 30vw;
+  width: 50vw;
+`;
+const Hole = styled.div`
+  background-color: ${(props) => props.theme.holeColor};
+  height: 7.2vw;
+  width: 12vw;
+  bottom: 0;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.3);
+  }
+`;
 
 function App() {
+  const BiggerHole = () => {
+    //when click HOLE, its bigger than when hover that
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Hole onClick={BiggerHole}></Hole>
+    </Container>
   );
 }
 
