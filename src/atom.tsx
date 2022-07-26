@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const GrowingHoleState = atom({
+export const holeState = atom({
   key: "hole",
   default: false,
 });

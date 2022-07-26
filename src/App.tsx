@@ -1,7 +1,7 @@
 //due date "07/31"
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { GrowingHoleState } from "./atom";
+import { holeState } from "./atom";
 
 const Rhombus = styled.div`
   width: 20vw;
@@ -19,30 +19,36 @@ const Container = styled.span`
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 4;
   &::before {
     content: "";
     position: absolute;
     background-color: #ffa600;
     width: 10vw;
-    height: 50vh;
+    height: 30vh;
     top: 50%;
     left: 0;
+    transform-origin: left;
+    transform: skew(0turn, 26.5deg);
+    //matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
   }
   &::after {
     content: "";
     position: absolute;
     background-color: #776748;
     width: 10vw;
-    height: 50vh;
+    height: 30vh;
     top: 50%;
-    right: 0;
+    right: 0vw;
+    transform-origin: right;
+    transform: skew(0turn, -26.5deg);
   }
 `;
-const Hole = styled.div<{ isActive: boolean }>`
+const Hole = styled.div<{ hole: boolean }>`
   background-color: ${(props) =>
-    props.isActive ? "pink" : props.theme.holeColor};
-  height: ${(props) => (props.isActive ? "5vw" : "5vw")};
-  width: ${(props) => (props.isActive ? "10vw" : "10vw")};
+    props.hole ? "white" : props.theme.holeColor};
+  height: 5vw;
+  width: 10vw;
   bottom: 0;
   border-radius: 50%;
   /* transition: transform 0.3s ease-in-out, width 0.3s ease-in-out,
@@ -52,16 +58,14 @@ const Hole = styled.div<{ isActive: boolean }>`
 `;
 
 function App() {
-  const [growingHole, setGrwoingHole] = useRecoilState(GrowingHoleState);
+  const [hole, setHole] = useRecoilState(holeState);
   const SizeUpHole = () => {
-    setGrwoingHole(!growingHole);
+    setHole(!hole);
   };
   return (
     <Container>
-      {/* <RightSidePillar></RightSidePillar>
-      <LeftSidePillar></LeftSidePillar> */}
       <Rhombus>
-        <Hole isActive={growingHole} onClick={SizeUpHole}></Hole>
+        <Hole hole={hole} onClick={SizeUpHole}></Hole>
       </Rhombus>
     </Container>
   );
