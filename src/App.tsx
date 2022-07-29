@@ -3,56 +3,67 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { holeState } from "./atom";
 
-const Rhombus = styled.div`
-  width: 20vw;
-  height: 10vw;
-  background-color: wheat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  clip-path: polygon(0 50%, 50% 100%, 100% 50%, 50% 0);
-  z-index: 3;
+const Scene = styled.div`
+  position: relative;
+  top: 20vh;
+  /* perspective: 700vh; */
+  width: 20vh;
+  height: 40vh;
 `;
 
-const Container = styled.span`
+const Cube = styled.div`
+  /* transform-style: preserve-3d; "if this on it looks like more 3d not 2.5d"*/
+  transform: translateZ(-30vh);
+`;
+
+const CubeFace = styled.div`
+  position: absolute;
+  width: 20vh;
+  height: 40vh;
+  line-height: 20vh;
+  font-size: 4vh;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transform-style: preserve-3d;
+  transform: rotateX(-30deg);
+`;
+const Front = styled(CubeFace)`
+  background: #776748;
+  transform: rotateY(45deg) translateZ(10vh);
+`;
+const Right = styled(CubeFace)`
+  background: #ffa600;
+  transform: rotateY(135deg) translateZ(10vh);
+`;
+const Back = styled(CubeFace)`
+  background: #776748;
+  transform: rotateY(225deg) translateZ(10vh);
+`;
+const Left = styled(CubeFace)`
+  background: #ffa600;
+  transform: rotateY(-45deg) translateZ(10vh);
+`;
+const Top = styled(CubeFace)`
+  background: wheat;
+  transform: rotateX(90deg) rotateZ(45deg) translateZ(10vh);
+  height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 4;
-  &::before {
-    content: "";
-    position: absolute;
-    background-color: #ffa600;
-    width: 10vw;
-    height: 30vh;
-    top: 50%;
-    left: 0;
-    transform-origin: left;
-    transform: skew(0turn, 26.5deg);
-    //matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    background-color: #776748;
-    width: 10vw;
-    height: 30vh;
-    top: 50%;
-    right: 0vw;
-    transform-origin: right;
-    transform: skew(0turn, -26.5deg);
-  }
+`;
+const Bottom = styled(CubeFace)`
+  background: wheat;
+  transform: rotateX(-90deg) rotateZ(45deg) translateZ(30vh);
+  height: 20vh;
 `;
 const Hole = styled.div<{ hole: boolean }>`
   background-color: ${(props) =>
     props.hole ? "white" : props.theme.holeColor};
-  height: 5vw;
-  width: 10vw;
-  bottom: 0;
+  height: 12vh;
+  width: 12vh;
   border-radius: 50%;
-  /* transition: transform 0.3s ease-in-out, width 0.3s ease-in-out,
-    height 0.3s ease-in-out; */
+
   &:hover {
   }
 `;
@@ -62,12 +73,22 @@ function App() {
   const SizeUpHole = () => {
     setHole(!hole);
   };
+
   return (
-    <Container>
-      <Rhombus>
-        <Hole hole={hole} onClick={SizeUpHole}></Hole>
-      </Rhombus>
-    </Container>
+    <Scene>
+      <Cube>
+        <CubeFace>
+          <Front></Front>
+          <Right></Right>
+          <Back></Back>
+          <Left></Left>
+          <Top>
+            <Hole hole={hole} onClick={SizeUpHole}></Hole>
+          </Top>
+          <Bottom></Bottom>
+        </CubeFace>
+      </Cube>
+    </Scene>
   );
 }
 
