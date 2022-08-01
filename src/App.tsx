@@ -1,7 +1,16 @@
 //due date "07/31"
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { holeState } from "./atom";
+
+const animation = keyframes`
+   from {
+    transform: rotateX(-30deg) rotateY(0deg) 
+   }
+   to {
+    transform: rotateX(-30deg) rotateY(360deg)
+   }
+`;
 
 const Scene = styled.div`
   position: relative;
@@ -12,8 +21,9 @@ const Scene = styled.div`
 `;
 
 const Cube = styled.div`
-  /* transform-style: preserve-3d; "if this on it looks like more 3d not 2.5d"*/
-  transform: translateZ(-30vh);
+  transform: rotateX(-30deg);
+  /* animation: ${animation} linear 4s infinite; */
+  transform-style: preserve-3d;
 `;
 
 const CubeFace = styled.div`
@@ -26,44 +36,53 @@ const CubeFace = styled.div`
   color: white;
   text-align: center;
   transform-style: preserve-3d;
-  transform: rotateX(-30deg);
+  /* transform: rotateX(-30deg); */
+  transition: 1s background-color;
 `;
-const Front = styled(CubeFace)`
-  background: #776748;
+const Front = styled(CubeFace)<{ hole: boolean }>`
+  background-color: ${(props) => (props.hole ? "rgb(0, 58, 58)" : " #776748")};
   transform: rotateY(45deg) translateZ(10vh);
+  box-shadow: 0 0 2px 1px white;
 `;
-const Right = styled(CubeFace)`
-  background: #ffa600;
+const Right = styled(CubeFace)<{ hole: boolean }>`
+  background-color: ${(props) => (props.hole ? "rgb(0, 128, 128)" : "#ffa600")};
   transform: rotateY(135deg) translateZ(10vh);
+  box-shadow: 0 0 2px 1px white;
 `;
-const Back = styled(CubeFace)`
-  background: #776748;
+const Back = styled(CubeFace)<{ hole: boolean }>`
+  background-color: ${(props) => (props.hole ? "rgb(0, 58, 58)" : " #776748")};
   transform: rotateY(225deg) translateZ(10vh);
+  box-shadow: 0 0 2px 1px white;
 `;
-const Left = styled(CubeFace)`
-  background: #ffa600;
+const Left = styled(CubeFace)<{ hole: boolean }>`
+  background-color: ${(props) => (props.hole ? "rgb(0, 128, 128)" : "#ffa600")};
   transform: rotateY(-45deg) translateZ(10vh);
+  box-shadow: 0 0 2px 1px white;
 `;
-const Top = styled(CubeFace)`
-  background: wheat;
+const Top = styled(CubeFace)<{ hole: boolean }>`
+  /* background: rgb(245, 222, 179); */
+  background-color: ${(props) =>
+    props.hole ? "rgb(0, 171, 171)" : " rgb(245, 222, 179)"};
   transform: rotateX(90deg) rotateZ(45deg) translateZ(10vh);
   height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 2px 1px white;
 `;
-const Bottom = styled(CubeFace)`
-  background: wheat;
+const Bottom = styled(CubeFace)<{ hole: boolean }>`
+  background-color: ${(props) =>
+    props.hole ? "rgb(0, 171, 171)" : " rgb(245, 222, 179)"};
   transform: rotateX(-90deg) rotateZ(45deg) translateZ(30vh);
   height: 20vh;
+  box-shadow: 0 0 2px 1px white;
 `;
 const Hole = styled.div<{ hole: boolean }>`
-  background-color: ${(props) =>
-    props.hole ? "white" : props.theme.holeColor};
+  background-color: white;
   height: 12vh;
   width: 12vh;
   border-radius: 50%;
-
+  color: rgb(0, 128, 128);
   &:hover {
   }
 `;
@@ -78,14 +97,14 @@ function App() {
     <Scene>
       <Cube>
         <CubeFace>
-          <Front></Front>
-          <Right></Right>
-          <Back></Back>
-          <Left></Left>
-          <Top>
+          <Front hole={hole}></Front>
+          <Right hole={hole}></Right>
+          <Back hole={hole}></Back>
+          <Left hole={hole}></Left>
+          <Top hole={hole}>
             <Hole hole={hole} onClick={SizeUpHole}></Hole>
           </Top>
-          <Bottom></Bottom>
+          <Bottom hole={hole}></Bottom>
         </CubeFace>
       </Cube>
     </Scene>
