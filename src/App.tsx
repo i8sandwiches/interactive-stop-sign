@@ -175,8 +175,8 @@ const Bottom = styled(CubeFace)<{ hole: boolean }>`
     /* transition-timing-function: ${(props) =>
       props.hole
         ? "cubic-bezier(0,-0.01,1,-0.1)"
-        : "cubic-bezier(.34,1.19,.39,.95)"};
-  } */
+        : "cubic-bezier(.34,1.19,.39,.95)"}; */
+  }
 `;
 const Hole = styled.div<{ hole: boolean }>`
   z-index: 2;
