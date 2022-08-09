@@ -14,7 +14,7 @@ const animation = keyframes`
 
 const Scene = styled.div`
   position: relative;
-  top: 20vh;
+  top: 10vh;
   /* perspective: 700vh; */
   width: 20vh;
   height: 40vh;
@@ -37,7 +37,7 @@ const CubeFace = styled.div`
   text-align: center;
   transform-style: preserve-3d;
   /* transform: rotateX(-30deg); */
-  border-collapse: collapse;
+
   transition: 1s background-color;
 `;
 const Front = styled(CubeFace)<{ hole: boolean }>`
@@ -152,32 +152,48 @@ const Top = styled(CubeFace)<{ hole: boolean }>`
     transition-delay: ${(props) => (props.hole ? "0s" : "1.3s")};
   }
 `;
+const BottomCircle = styled.div``;
+const Shadow = styled.div``;
+const Frame = styled.div<{ hole: boolean }>`
+  z-index: 2;
+  position: absolute;
+  width: 305%;
+  height: 305%;
+  border-radius: 50%;
+  border: ${(props) => (props.hole ? "0vh" : "25vh")} solid black;
+  transition: 1s border linear;
+  transition-delay: ${(props) => (props.hole ? "1.3s" : "0s")};
+`;
 const Bottom = styled(CubeFace)<{ hole: boolean }>`
-  /* background-color: ${(props) =>
-    props.hole ? "rgb(0, 171, 171)" : " rgb(245, 222, 179)"}; */
   background-color: rgb(245, 222, 179);
   transform: rotateX(-90deg) rotateZ(45deg) translateZ(30vh);
   height: 20vh;
   box-shadow: 0 0 2px 1px white;
+  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
-  &::before {
-    position: absolute;
+  ${BottomCircle} {
     z-index: 1;
+    position: absolute;
     border-radius: 50%;
     content: "";
-    width: ${(props) => (props.hole ? "300%" : "100%")};
-    height: ${(props) => (props.hole ? "300%" : "100%")};
+    width: 300%;
+    height: 300%;
     background-color: rgb(0, 128, 128);
-    transition: 1s width, 1s height, 1s background-color, 1s transform;
-    transition-delay: ${(props) => (props.hole ? "1.3s" : "0s")};
-    /* transition-timing-function: ${(props) =>
-      props.hole
-        ? "cubic-bezier(0,-0.01,1,-0.1)"
-        : "cubic-bezier(.34,1.19,.39,.95)"}; */
+    overflow: hidden;
+    ::before {
+      content: "";
+      transform: translate(-50%, -20%);
+      width: 30vh;
+      height: 25vh;
+      position: absolute;
+      background-color: rgb(0, 58, 58);
+      clip-path: polygon(0% 0%, 100% 0%, 83% 100%, 17% 100%);
+    }
   }
 `;
+
 const Hole = styled.div<{ hole: boolean }>`
   z-index: 2;
   background-color: white;
@@ -205,7 +221,10 @@ function App() {
           <Top hole={hole}>
             <Hole hole={hole} onClick={SizeUpHole}></Hole>
           </Top>
-          <Bottom hole={hole}></Bottom>
+          <Bottom hole={hole}>
+            <Frame hole={hole}></Frame>
+            <BottomCircle></BottomCircle>
+          </Bottom>
         </CubeFace>
       </Cube>
     </Scene>
