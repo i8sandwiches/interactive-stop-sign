@@ -36,6 +36,7 @@ const CubeFace = styled.div`
   color: white;
   text-align: center;
   transform-style: preserve-3d;
+
   /* transform: rotateX(-30deg); */
 
   transition: 1s background-color;
@@ -45,8 +46,8 @@ const Front = styled(CubeFace)<{ hole: boolean }>`
     props.hole ? "rgb(0, 58, 58)" : " #776748"}; */
   background-color: #776748;
   transform: rotateY(45deg) translateZ(10vh);
-  box-shadow: 0 0 2px 1px white;
   overflow: hidden;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     left: 0;
     top: 0;
@@ -67,8 +68,8 @@ const Right = styled(CubeFace)<{ hole: boolean }>`
     props.hole ? "rgb(0, 128, 128)" : "#ffa600"}; */
   background-color: #ffa600;
   transform: rotateY(135deg) translateZ(10vh);
-  box-shadow: 0 0 2px 1px white;
   overflow: hidden;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     left: 0;
     top: 0;
@@ -89,8 +90,8 @@ const Back = styled(CubeFace)<{ hole: boolean }>`
     props.hole ? "rgb(0, 58, 58)" : " #776748"}; */
   background-color: #776748;
   transform: rotateY(225deg) translateZ(10vh);
-  box-shadow: 0 0 2px 1px white;
   overflow: hidden;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     left: 0;
     top: 0;
@@ -111,8 +112,8 @@ const Left = styled(CubeFace)<{ hole: boolean }>`
     props.hole ? "rgb(0, 128, 128)" : "#ffa600"}; */
   background-color: #ffa600;
   transform: rotateY(-45deg) translateZ(10vh);
-  box-shadow: 0 0 2px 1px white;
   overflow: hidden;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     left: 0;
     top: 0;
@@ -137,9 +138,9 @@ const Top = styled(CubeFace)<{ hole: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 2px 1px white;
   /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */
   overflow: hidden;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     position: absolute;
     z-index: 1;
@@ -153,7 +154,6 @@ const Top = styled(CubeFace)<{ hole: boolean }>`
   }
 `;
 const BottomCircle = styled.div``;
-const Shadow = styled.div``;
 const Frame = styled.div<{ hole: boolean }>`
   z-index: 2;
   position: absolute;
@@ -166,27 +166,29 @@ const Frame = styled.div<{ hole: boolean }>`
 `;
 const Bottom = styled(CubeFace)<{ hole: boolean }>`
   background-color: rgb(245, 222, 179);
+  background-color: rgb(0, 58, 58);
   transform: rotateX(-90deg) rotateZ(45deg) translateZ(30vh);
   height: 20vh;
-  box-shadow: 0 0 2px 1px white;
   border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 0.1vh 0.1vh white;
   ${BottomCircle} {
     z-index: 1;
     position: absolute;
     border-radius: 50%;
     content: "";
-    width: 300%;
-    height: 300%;
+    width: 60vh;
+    height: 60vh;
     background-color: rgb(0, 128, 128);
     overflow: hidden;
     ::before {
+      /* box-shadow: inset 0 0 0.1vh 0.1vh black; */
       content: "";
       transform: translate(-50%, -20%);
       width: 30vh;
-      height: 25vh;
+      height: 26vh;
       position: absolute;
       background-color: rgb(0, 58, 58);
       clip-path: polygon(0% 0%, 100% 0%, 83% 100%, 17% 100%);
