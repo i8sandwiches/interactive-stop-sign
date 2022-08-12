@@ -56,6 +56,7 @@ border-spacing: 0;
 box-sizing: border-box;
 }
 body {
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
