@@ -47,7 +47,7 @@ const Front = styled(CubeFace)<{ hole: boolean }>`
   background-color: #776748;
   transform: rotateY(45deg) translateZ(10vh);
   overflow: hidden;
-  box-shadow: 0 0 0.1vh 0.1vh white;
+  box-shadow: 0.08vh -0.08vh white, -0.08vh -0.08vh white, inset 0 -0.08vh white;
   &::before {
     left: 0;
     top: 0;
@@ -69,7 +69,7 @@ const Right = styled(CubeFace)<{ hole: boolean }>`
   background-color: #ffa600;
   transform: rotateY(135deg) translateZ(10vh);
   overflow: hidden;
-  box-shadow: 0 0 0.1vh 0.1vh white;
+  box-shadow: 0.08vh -0.08vh white, -0.08vh -0.08vh white, inset 0 -0.08vh white;
   &::before {
     left: 0;
     top: 0;
@@ -91,7 +91,7 @@ const Back = styled(CubeFace)<{ hole: boolean }>`
   background-color: #776748;
   transform: rotateY(225deg) translateZ(10vh);
   overflow: hidden;
-  box-shadow: 0 0 0.1vh 0.1vh white;
+  box-shadow: 0.08vh -0.08vh white, -0.08vh -0.08vh white, inset 0 -0.08vh white;
   &::before {
     left: 0;
     top: 0;
@@ -113,7 +113,7 @@ const Left = styled(CubeFace)<{ hole: boolean }>`
   background-color: #ffa600;
   transform: rotateY(-45deg) translateZ(10vh);
   overflow: hidden;
-  box-shadow: 0 0 0.1vh 0.1vh white;
+  box-shadow: 0.08vh -0.08vh white, -0.08vh -0.08vh white, inset 0 -0.08vh white;
   &::before {
     left: 0;
     top: 0;
@@ -140,7 +140,6 @@ const Top = styled(CubeFace)<{ hole: boolean }>`
   align-items: center;
   /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */
   overflow: hidden;
-  box-shadow: 0 0 0.1vh 0.1vh white;
   &::before {
     position: absolute;
     z-index: 1;
@@ -173,7 +172,6 @@ const Bottom = styled(CubeFace)<{ hole: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 0.1vh 0.1vh white;
   ${BottomCircle} {
     z-index: 1;
     position: absolute;
@@ -188,7 +186,7 @@ const Bottom = styled(CubeFace)<{ hole: boolean }>`
       content: "";
       transform: translate(-50%, -20%);
       width: 30vh;
-      height: 26vh;
+      height: 25.6vh;
       position: absolute;
       background-color: rgb(0, 58, 58);
       clip-path: polygon(0% 0%, 100% 0%, 83% 100%, 17% 100%);
